@@ -1,7 +1,7 @@
 import re
 
-weights_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_training_results_plz_size/epoch_20/epoch_20_details.txt"
-output_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_training_results_plz_size/processed_weights_with_labels.txt"
+weights_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_training_results20/epoch_19/epoch_19_details.txt"
+output_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_training_results20/processed_weights_with_labels1.txt"
 
 # 가중치 파일에서 '--- Updated Weights ---' 이후의 가중치 값들을 읽어와서 float 값으로 변환하여 저장하는 함수
 def process_weights_file(weights_file, output_file):

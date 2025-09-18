@@ -190,15 +190,15 @@ def main():
 
     input_size = 64 * 64
     base_path = "C:/Users/asx12/OneDrive/바탕 화면/인공지능"
-    csv_file = "dataset_labels.csv"
+    csv_file = "dataset_labels_3fonts.csv"
     batch_size = 64
-    learning_rate = 0.001
-    epochs = 200
+    learning_rate = 0.005
+    epochs = 300
     activation_function = 'relu'  # 활성화 함수 선택 ('sigmoid', 'relu', 'tanh' 중 선택)
-    output_activation_function = 'softmax'  # 출력층 활성화 함수 설정 ('sigmoid', 'softmax' 중 선택) - 수정됨
+    output_activation_function = 'softmax'  # 출력층 활성화 함수 설정 ('sigmoid', 'softtmax' 중 선택) - 수정됨
     weight_init_method = 'he'  # 가중치 초기화 방법 선택 ('xavier', 'he' 중 선택)
 
-    results_folder = "all_training_results_plz_size"
+    results_folder = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_3fonts_0.005"
     os.makedirs(results_folder, exist_ok=True)
 
     try:
@@ -217,7 +217,7 @@ def main():
     test_inputs, test_targets = inputs[train_size:], targets[train_size:]
 
     output_size = len(train_targets[0])  # 출력 노드 수를 레이블의 길이로 설정
-    layer_structure = [input_size, 512, 256, 126, output_size]  # 마지막 레이어 노드 수를 출력 크기로 설정
+    layer_structure = [input_size, 256, 126, 64, output_size]  # 마지막 레이어 노드 수를 출력 크기로 설정
     weights = [initialize_weights(layer_structure[i + 1], layer_structure[i], method=weight_init_method, seed=42) for i in range(len(layer_structure) - 1)]
 
     # Update batch information - 수정됨: 배치 크기 및 전체 배치 수 정보 저장

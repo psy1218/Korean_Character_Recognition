@@ -12,8 +12,8 @@ def get_one_hot_vector(index, size):
     return vector
 
 # CSV 파일에 이미지 경로와 원핫 인코딩 라벨 저장
-csv_filename = "dataset_labels_jimin.csv"
-base_folder = "글자이미지생성_지민"
+csv_filename = "dataset_labels_평가40.csv"
+base_folder = r"C:\Users\asx12\OneDrive\바탕 화면\인공지능\글자이미지생성_all_one_40"
 
 with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)

@@ -12,28 +12,40 @@ def get_one_hot_vector(index, size):
     return vector
 
 # CSV 파일에 이미지 경로와 원핫 인코딩 라벨 저장
-csv_filename = "dataset_labels_jimin.csv"
-base_folder = "글자이미지생성_지민"
+csv_filename = "dataset_labels_학습.csv"
+base_folder = r"C:\Users\asx12\OneDrive\바탕 화면\인공지능\글자_학습_휴먼엑스포"
 
-with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
+
+# 기존 데이터 읽기 및 중복 확인용 세트 생성
+existing_data = set()
+if os.path.exists(csv_filename):
+    with open(csv_filename, mode="r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        next(reader)  # 헤더 건너뜀
+        for row in reader:
+            existing_data.add(row[0])  # 첫 번째 열(이미지 경로) 저장
+
+with open(csv_filename, mode="a", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)
     
-    # 헤더 작성 (이미지 경로 + 각 글자에 대한 컬럼)
-    header = ["image_path"] + unique_chars
-    writer.writerow(header)
+    # 파일이 새로 생성되었다면 헤더 추가
+    if os.stat(csv_filename).st_size == 0:
+        header = ["image_path"] + unique_chars
+        writer.writerow(header)
     
     # 각 글자 폴더 내 이미지 파일 경로와 원핫 인코딩 라벨 작성
     for i, char in enumerate(unique_chars):
         one_hot_vector = get_one_hot_vector(i, num_chars)
         char_folder = os.path.join(base_folder, char)
         
-        # 해당 글자 폴더 내 모든 png 파일 탐색
+        # 해당 글자 폴더 내 모든 bmp 파일 탐색
         if os.path.exists(char_folder):
             for img_file in os.listdir(char_folder):
                 if img_file.endswith(".bmp"):
                     image_path = os.path.join(char_folder, img_file)
-                    writer.writerow([image_path] + one_hot_vector)
+                    if image_path not in existing_data:  # 중복 확인
+                        writer.writerow([image_path] + one_hot_vector)
         else:
             print(f"{char_folder} 폴더가 존재하지 않습니다.")
 
-print(f"{csv_filename} 파일이 생성되었습니다.")
+print(f"{csv_filename} 파일에 데이터가 추가되었습니다.")

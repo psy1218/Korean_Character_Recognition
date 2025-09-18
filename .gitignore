@@ -3,3 +3,11 @@ all_training*
 epoch*
 batch*
 weights*
+
+순전파/
+이미지생성/
+평가 결과/
+학습결과/
+학습결과2/
+C_결과/
+csv 파일 모음/

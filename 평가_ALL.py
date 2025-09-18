@@ -141,6 +141,10 @@ def evaluate_model(weights_file, base_path, csv_file, input_size, output_log_fil
             max_value = np.max(output)
             max_index = np.argmax(output)
 
+            # 상위 4개의 출력값과 그 위치 찾기
+            top_4_indices = np.argsort(output.flatten())[-4:][::-1]
+            top_4_values = output.flatten()[top_4_indices]
+
             # 라벨 비교 정보 저장
             label_log.write(f"이미지 경로: {sample}\n")
             label_log.write(f"실제 라벨: {character_name}, 목표 인덱스: {target_class}\n")
@@ -148,6 +152,7 @@ def evaluate_model(weights_file, base_path, csv_file, input_size, output_log_fil
             label_log.write(f"타겟 벡터: {target}\n")
             label_log.write(f"예측 벡터: {output.flatten()}\n")
             label_log.write(f"예측 벡터의 최대값: {max_value}, 위치: {max_index}\n")
+            label_log.write(f"상위 4개의 예측값: {top_4_values}, 위치: {top_4_indices}\n")
             label_log.write("====================\n")
 
             if predicted_character == character_name:
@@ -162,12 +167,13 @@ def evaluate_model(weights_file, base_path, csv_file, input_size, output_log_fil
 
 # 메인 함수
 def main():
-    weights_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_training_results_plz/processed_weights_with_labels.txt"
+    weights_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/all_training_results_plz_size/processed_weights_with_labels.txt"
+    #weights_file = "C:/AI/all_training_results_new5/processed_weights_with_labels.txt"
     base_path = "C:/Users/asx12/OneDrive/바탕 화면/인공지능"
-    csv_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/dataset_labels_test.csv"
+    csv_file = "C:/AI/dataset_labels_평가19.csv"
     input_size = 64 * 64
-    output_log_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/label_comparison_output_all.txt"
-    prediction_log_file = "C:/Users/asx12/OneDrive/바탕 화면/인공지능/prediction_results.txt"
+    output_log_file = "C:/AI/label_comparison_output.txt"
+    prediction_log_file = "C:/AI/prediction_results.txt"
     
     # 가중치 읽기 및 평가
     evaluate_model(weights_file, base_path, csv_file, input_size, output_log_file, prediction_log_file)
