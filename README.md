@@ -1,5 +1,10 @@
 # 📖 한글 문자 인식 인공신경망
 임베디드시스템공학과 202201658 박소윤
+## 정확도 이미지
+
+<img width="759" height="313" alt="image" src="https://github.com/user-attachments/assets/d18a7cae-9825-4f55-8b0d-050198f968a7" />
+
+<img width="737" height="701" alt="image" src="https://github.com/user-attachments/assets/77c71a84-4a6a-49c7-80c9-6582fafb761e" />
 
 ---
 
